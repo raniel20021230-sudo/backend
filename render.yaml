@@ -1,0 +1,9 @@
+[build]
+builder = "go"
+functions = "functions"
+publish = "frontend"
+
+[[redirects]]
+from = "/*"
+to = "/index.html"
+status = 200
