@@ -54,7 +54,7 @@ const Product = require('./models/product');
 mongoose.set('strictQuery', false);
 
 // Connect DB
-const MONGO = process.env.MONGO_URI || 'mongodb+srv://riomarizgonzales:r12345678@cluster1.u8zdj8k.mongodb.net/MARCOM';
+const MONGO = process.env.MONGO_URI || 'mongodb+srv://raniel:raniel1432@raniel.skzmuxw.mongodb.net/MarineBlue';
 console.log('Connecting to MongoDB with URI:', MONGO.substring(0, 50) + '...');
 mongoose.connect(MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(()=> {
