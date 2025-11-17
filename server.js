@@ -54,7 +54,7 @@ const Product = require('./models/product');
 mongoose.set('strictQuery', false);
 
 // Connect DB
-const MONGO = process.env.MONGO_URI || 'mongodb+srv://raniel:raniel1432@raniel.skzmuxw.mongodb.net/MarineBlue';
+const MONGO = process.env.MONGO_URI || 'mongodb+srv://riomarizgonzales:r12345678@cluster1.u8zdj8k.mongodb.net/MARCOM';
 console.log('Connecting to MongoDB with URI:', MONGO.substring(0, 50) + '...');
 mongoose.connect(MONGO, { useNewUrlParser: true, useUnifiedTopology: true })
 .then(()=> {
@@ -99,8 +99,13 @@ app.post('/api/auth/login', async (req, res) => {
 
 // Products
 app.get('/api/products', async (req, res) => {
-  const products = await Product.find().sort({ createdAt: -1 });
-  res.json(products);
+  try {
+    const products = await Product.find().sort({ createdAt: -1 }).lean();
+    res.json(products);
+  } catch (err) {
+    console.error('Error fetching products:', err);
+    res.status(500).json({ message: 'Failed to fetch products', error: err.message });
+  }
 });
 
 app.get('/api/products/:id', async (req, res) => {
