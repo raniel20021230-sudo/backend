@@ -22,11 +22,12 @@ const corsOptions = {
 };
 app.use(cors(corsOptions));
 app.use(express.json());
-// Serve uploaded images
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
-// Serve uploaded images
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+// Serve uploaded images with long-term caching
+app.use('/uploads', express.static(path.join(__dirname, 'uploads'), {
+  maxAge: '9d',
+  etag: false
+}));
 
 // Serve frontend static files
 app.use(express.static(path.join(__dirname, '../frontend')));
